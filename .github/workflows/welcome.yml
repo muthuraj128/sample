@@ -10,6 +10,7 @@ jobs:
     permissions:
       issues: write
       pull-requests: write
+
     steps:
       - name: Welcome first-time contributor
         uses: actions/github-script@v7
@@ -29,7 +30,24 @@ jobs:
             const prCount = issues.filter(issue => issue.pull_request).length;
 
             if (prCount < 10) {
-              const welcomeMessage = `👋 Hi @${prUser}! Thanks for your first pull request. Welcome to the project! 🎉`;
+              const welcomeMessage = `
+              👋 Hi @${prUser}, welcome to **${repo}** and thank you for your very first pull request! 🎉  
+              We're thrilled to have you here. This is a collaborative space where everyone's contributions are valued.
+
+🔧 **Next steps**:
+- A maintainer will review your PR soon.
+- Feel free to ask questions or suggest improvements.
+- Explore other issues if you're looking to contribute more.
+
+💡 Tip: Don’t hesitate to check out our [CONTRIBUTING.md](https://github.com/muthuraj128/sample/main/CONTRIBUTING.md) and project documentation to get familiar with how things work.
+
+📝 Contributions aren't limited to code! Docs, testing, design, and feedback all make a big impact.
+
+Once again, welcome aboard! We're glad you're here. 😊
+
+Happy coding! 🚀
+              `;
+
               await github.rest.issues.createComment({
                 owner,
                 repo,
