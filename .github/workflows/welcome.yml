@@ -7,6 +7,9 @@ on:
 jobs:
   welcome:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - name: Welcome first-time contributor
         uses: actions/github-script@v7
@@ -25,7 +28,7 @@ jobs:
 
             const prCount = issues.filter(issue => issue.pull_request).length;
 
-            if (prCount === 1) {
+            if (prCount < 10) {
               const welcomeMessage = `👋 Hi @${prUser}! Thanks for your first pull request. Welcome to the project! 🎉`;
               await github.rest.issues.createComment({
                 owner,
